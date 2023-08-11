@@ -7,6 +7,14 @@
 		{
 			"name": "Project 2",
 			"path": "Project 2"
+		},
+		{
+			"name": "Arduino Nano Blink",
+			"path": "Arduino Nano Blink"
+		},
+		{
+			"name": "WS2812",
+			"path": "WS2812"
 		}
 	]
 }

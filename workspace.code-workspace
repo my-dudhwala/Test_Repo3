@@ -7,10 +7,6 @@
 		{
 			"name": "Project 2",
 			"path": "Project 2"
-		},
-		{
-			"name": "Nano Blink",
-			"path": "../../PlatformIO/Projects/Nano Blink"
 		}
 	]
 }

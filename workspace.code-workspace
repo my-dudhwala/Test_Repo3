@@ -15,6 +15,10 @@
 		{
 			"name": "WS2812",
 			"path": "WS2812"
+		},
+		{
+			"name": "Flag Push Button",
+			"path": "Flag Push Button"
 		}
 	]
 }

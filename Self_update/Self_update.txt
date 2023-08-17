@@ -1,1 +1,74 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <ArduinoJson.h>
 
+const char* ssid = "R&D Web";
+const char* password = "123456789";
+const char* githubApiUrl = "https://api.github.com/repos/username/repository/releases/latest"; // Replace with your GitHub repository details
+
+const char* currentVersion = "1.0.0"; // Replace with your ESP32's current version
+
+void setup() {
+  Serial.begin(115200);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+  Serial.println("Connected to WiFi");
+  
+  HTTPClient http;
+  http.begin(githubApiUrl);
+  
+  int httpResponseCode = http.GET();
+  if (httpResponseCode == 200) {
+    String payload = http.getString();
+    StaticJsonDocument<200> doc;
+    DeserializationError error = deserializeJson(doc, payload);
+    if (!error) {
+      const char* latestVersion = doc["tag_name"];
+      Serial.print("Latest version: ");
+      Serial.println(latestVersion);
+      
+      // Compare versions and perform update if needed
+      if (isNewerVersion(latestVersion, currentVersion)) {
+        Serial.println("Newer version available. Triggering update...");
+        // Trigger the update process here
+      } else {
+        Serial.println("Up to date.");
+      }
+    } else {
+      Serial.println("JSON parsing error");
+    }
+  } else {
+    Serial.print("HTTP GET failed, error: ");
+    Serial.println(httpResponseCode);
+  }
+  
+  http.end();
+}
+
+void loop() {
+  // Your main loop code here
+}
+
+bool isNewerVersion(const char* newVersion, const char* oldVersion) {
+  // Custom version comparison logic
+  // You need to implement the logic to compare versions
+  // For a simple example, let's assume version strings are in the format "X.Y.Z"
+  int newMajor, newMinor, newPatch;
+  int oldMajor, oldMinor, oldPatch;
+  
+  sscanf(newVersion, "%d.%d.%d", &newMajor, &newMinor, &newPatch);
+  sscanf(oldVersion, "%d.%d.%d", &oldMajor, &oldMinor, &oldPatch);
+  
+  if (newMajor > oldMajor) {
+    return true;
+  } else if (newMajor == oldMajor && newMinor > oldMinor) {
+    return true;
+  } else if (newMajor == oldMajor && newMinor == oldMinor && newPatch > oldPatch) {
+    return true;
+  }
+  
+  return false;
+}

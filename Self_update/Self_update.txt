@@ -4,7 +4,7 @@
 
 const char* ssid = "R&D Web";
 const char* password = "123456789";
-const char* githubApiUrl = "https://api.github.com/repos/username/repository/releases/latest"; // Replace with your GitHub repository details
+const char* githubApiUrl = "https://github.com/my-dudhwala/Test_Repo3/blob/main/Self_update/Self_update.txt";
 
 const char* currentVersion = "1.0.0"; // Replace with your ESP32's current version
 

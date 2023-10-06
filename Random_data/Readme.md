@@ -1,5 +1,6 @@
 ### Random Data
-
+### SUCCESS!  
+I have succefully managed to get 1625 Strings of 512 Bytes(approx.), means data of 1625 Strings X 512 Bytes = 832000 Bytes = 832KB
 #### Warning : Do not focus on the file names...
 
 1. You can download this files for your experiments, I have an experiment of downloading text file and parsing the data.
